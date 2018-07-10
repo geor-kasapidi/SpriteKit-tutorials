@@ -7,16 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		143A677E20F5164D0067FD24 /* GeometryUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A677D20F5164D0067FD24 /* GeometryUtils.swift */; };
 		DDBDD26320F4779F00649EAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBDD26220F4779F00649EAD /* AppDelegate.swift */; };
 		DDBDD26920F4779F00649EAD /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBDD26820F4779F00649EAD /* GameScene.swift */; };
 		DDBDD26B20F4779F00649EAD /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBDD26A20F4779F00649EAD /* GameViewController.swift */; };
 		DDBDD26E20F4779F00649EAD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDBDD26C20F4779F00649EAD /* Main.storyboard */; };
 		DDBDD27020F477A000649EAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDBDD26F20F477A000649EAD /* Assets.xcassets */; };
 		DDBDD27320F477A000649EAD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDBDD27120F477A000649EAD /* LaunchScreen.storyboard */; };
-		DDBDD27B20F48ED500649EAD /* VectorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBDD27A20F48ED500649EAD /* VectorUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		143A677D20F5164D0067FD24 /* GeometryUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryUtils.swift; sourceTree = "<group>"; };
 		DDBDD25F20F4779F00649EAD /* ZombieKonga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZombieKonga.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDBDD26220F4779F00649EAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDBDD26820F4779F00649EAD /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -25,7 +26,6 @@
 		DDBDD26F20F477A000649EAD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DDBDD27220F477A000649EAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DDBDD27420F477A000649EAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DDBDD27A20F48ED500649EAD /* VectorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +65,7 @@
 				DDBDD26F20F477A000649EAD /* Assets.xcassets */,
 				DDBDD27120F477A000649EAD /* LaunchScreen.storyboard */,
 				DDBDD27420F477A000649EAD /* Info.plist */,
-				DDBDD27A20F48ED500649EAD /* VectorUtils.swift */,
+				143A677D20F5164D0067FD24 /* GeometryUtils.swift */,
 			);
 			path = ZombieKonga;
 			sourceTree = "<group>";
@@ -141,8 +141,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDBDD27B20F48ED500649EAD /* VectorUtils.swift in Sources */,
 				DDBDD26920F4779F00649EAD /* GameScene.swift in Sources */,
+				143A677E20F5164D0067FD24 /* GeometryUtils.swift in Sources */,
 				DDBDD26B20F4779F00649EAD /* GameViewController.swift in Sources */,
 				DDBDD26320F4779F00649EAD /* AppDelegate.swift in Sources */,
 			);

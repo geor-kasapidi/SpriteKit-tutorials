@@ -1,18 +1,38 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
-    let backgroundNode = SKSpriteNode(imageNamed: "background1")
-    let zombieNode = SKSpriteNode(imageNamed: "zombie1")
+final class GameScene: SKScene {
+    private let backgroundNode = SKSpriteNode(imageNamed: "background1")
+    private let zombieNode = SKSpriteNode(imageNamed: "zombie1")
+    private let sceneBounds: CGRect
+    private let zombieMovePointsPerSec: CGFloat = 480
+    private let zombieRotationRadiansPerSec: CGFloat = 4 * π
+
+    private var lastUpdateTime: TimeInterval = 0
+    private var dt: TimeInterval = 0
+    private var zombieVelocity: CGPoint = .zero
+    private var lastTouchLocation: CGPoint = .zero
+
+    override init(size: CGSize) {
+        sceneBounds = CGRect(origin: .zero, size: size)
+
+        super.init(size: size)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError()
+    }
 
     override func didMove(to view: SKView) {
         backgroundColor = SKColor.black
+
+        let center = CGPoint(x: size.width/2, y: size.height/2)
 
         // add background
 
         do {
             backgroundNode.zPosition = -1
-            backgroundNode.position = CGPoint(x: size.width/2, y: size.height/2)
+            backgroundNode.position = center
 
             addChild(backgroundNode)
         }
@@ -21,7 +41,7 @@ class GameScene: SKScene {
 
         do {
             zombieNode.zPosition = 1
-            zombieNode.position = CGPoint(x: 400, y: 400)
+            zombieNode.position = center
 
             addChild(zombieNode)
         }
@@ -29,29 +49,21 @@ class GameScene: SKScene {
 
     // MARK: -
 
-    private var lastUpdateTime: TimeInterval = 0
-    private var dt: TimeInterval = 0
-
-    private let zombieMovePointsPerSec: CGFloat = 480
-    private var zombieVelocity: CGPoint = .zero
-    private var lastTouchLocation: CGPoint = .zero
-
-    private var angleOld: CGFloat = 0
-    private var angleNew: CGFloat = 0
-
-    // MARK: -
-
     override func update(_ currentTime: TimeInterval) {
         dt = lastUpdateTime > 0 ? currentTime - lastUpdateTime : 0
         lastUpdateTime = currentTime
 
-        checkZombieBounds()
+        check(position: &zombieNode.position, velocity: &zombieVelocity, in: sceneBounds)
 
         zombieNode.position = zombieNode.position + zombieVelocity * CGFloat(dt)
-        zombieNode.zRotation = zombieVelocity.angle
 
-        if (zombieNode.position - lastTouchLocation).length <= CGFloat(zombieMovePointsPerSec * CGFloat(dt)) {
+        rotate(sprite: zombieNode, rotationRadiansPerSec: zombieRotationRadiansPerSec)
+
+        let distanceToTouchLocation = (lastTouchLocation - zombieNode.position).length
+
+        if distanceToTouchLocation < 5 {
             zombieVelocity = .zero
+            lastTouchLocation = .zero
         }
     }
 
@@ -59,9 +71,7 @@ class GameScene: SKScene {
 
     private func didTouch(_ touchLocation: CGPoint) {
         lastTouchLocation = touchLocation
-        angleOld = zombieVelocity.angle
         zombieVelocity = (touchLocation - zombieNode.position).normalize() * zombieMovePointsPerSec
-        angleNew = zombieVelocity.angle
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -74,25 +84,31 @@ class GameScene: SKScene {
 
     // MARK: -
 
-    private func checkZombieBounds() {
-        if zombieNode.position.x < 0 {
-            zombieNode.position.x = 0
-            zombieVelocity.x = -zombieVelocity.x
+    private func rotate(sprite: SKSpriteNode, rotationRadiansPerSec: CGFloat) {
+        let shortestAngle = GeometryUtils.shortestAngle(between: sprite.zRotation, and: zombieVelocity.angle)
+        let amountToRotate = min(rotationRadiansPerSec * CGFloat(dt), abs(shortestAngle))
+        sprite.zRotation += shortestAngle.sign() * amountToRotate
+    }
+
+    private func check(position: inout CGPoint, velocity: inout Vector, in bounds: CGRect) {
+        if position.x < bounds.minX {
+            position.x = bounds.minX
+            velocity.x = -velocity.x
         }
 
-        if zombieNode.position.y < 0 {
-            zombieNode.position.y = 0
-            zombieVelocity.y = -zombieVelocity.y
+        if position.y < bounds.minY {
+            position.y = bounds.minY
+            velocity.y = -velocity.y
         }
 
-        if zombieNode.position.x > size.width {
-            zombieNode.position.x = size.width
-            zombieVelocity.x = -zombieVelocity.x
+        if position.x > bounds.maxX {
+            position.x = bounds.maxX
+            velocity.x = -velocity.x
         }
 
-        if zombieNode.position.y > size.height {
-            zombieNode.position.y = size.height
-            zombieVelocity.y = -zombieVelocity.y
+        if position.y > bounds.maxY {
+            position.y = bounds.maxY
+            velocity.y = -velocity.y
         }
     }
 }

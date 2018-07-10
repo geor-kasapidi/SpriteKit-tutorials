@@ -46,3 +46,29 @@ extension Vector {
         return atan2(y, x)
     }
 }
+
+// *******************************************************
+
+let π = CGFloat.pi
+let ππ = 2 * π
+
+final class GeometryUtils {
+    private init() {}
+
+    static func shortestAngle(between angle1: CGFloat, and angle2: CGFloat) -> CGFloat {
+        var angle = (angle2 - angle1).truncatingRemainder(dividingBy: ππ)
+
+        if angle > π { angle -= ππ }
+        if angle < -π { angle += ππ }
+
+        return angle
+    }
+}
+
+extension CGFloat {
+    func sign() -> CGFloat {
+        return self < 0 ? -1 : 1
+    }
+}
+
+// *******************************************************
