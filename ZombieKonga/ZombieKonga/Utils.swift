@@ -82,7 +82,7 @@ extension CGFloat {
         return CGFloat(Float(arc4random()) / Float(UInt32.max))
     }
 
-    static func rnd(min: CGFloat, max: CGFloat) -> CGFloat {
+    static func random(min: CGFloat, max: CGFloat) -> CGFloat {
         assert(min < max)
 
         return random() * (max - min) + min

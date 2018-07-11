@@ -7,6 +7,8 @@ final class GameScene: SKScene {
     private let enemyNode = SKSpriteNode(imageNamed: "enemy")
 
     private let sceneBounds: CGRect
+    private let gameArea: CGRect
+    private let enemyMovePointsPerSec: CGFloat = 320
     private let zombieMovePointsPerSec: CGFloat = 480
     private let zombieRotationRadiansPerSec: CGFloat = 4 * π
 
@@ -17,6 +19,7 @@ final class GameScene: SKScene {
 
     override init(size: CGSize) {
         sceneBounds = CGRect(origin: .zero, size: size)
+        gameArea = sceneBounds.insetBy(dx: 200, dy: 200)
 
         super.init(size: size)
     }
@@ -59,30 +62,16 @@ final class GameScene: SKScene {
 
         // move enemy
 
+        moveEnemy()
+
+        // catocalypse
+
         do {
-            let size = self.size
-            let duration: TimeInterval = 2
-
-            let randomMov = SKAction.run { [enemyNode] in
-                let to = CGPoint(
-                    x: CGFloat.rnd(min: 100, max: size.width - 200),
-                    y: CGFloat.rnd(min: 100, max: size.height - 200)
-                )
-
-                let mov = SKAction.move(to: to, duration: duration)
-
-                enemyNode.run(mov)
+            let addCat = SKAction.run { [weak self] in
+                self?.addCat()
             }
 
-            let wait = SKAction.wait(forDuration: duration)
-
-            enemyNode.run(SKAction.repeatForever(SKAction.sequence([randomMov, wait])))
-        }
-
-        // animate zombie
-
-        do {
-
+            run(SKAction.repeatForever(SKAction.sequence([addCat, SKAction.wait(forDuration: 1)])))
         }
     }
 
@@ -92,7 +81,7 @@ final class GameScene: SKScene {
         dt = lastUpdateTime > 0 ? currentTime - lastUpdateTime : 0
         lastUpdateTime = currentTime
 
-        check(position: &zombieNode.position, velocity: &zombieVelocity, in: sceneBounds)
+        check(position: &zombieNode.position, velocity: &zombieVelocity, in: gameArea)
 
         zombieNode.position = zombieNode.position + zombieVelocity * CGFloat(dt)
 
@@ -122,6 +111,41 @@ final class GameScene: SKScene {
 
     private func removeAnimationFromZombie() {
         zombieNode.removeAction(forKey: "animation")
+    }
+
+    private func addCat() {
+        let cat = SKSpriteNode(imageNamed: "cat")
+        cat.position = randomPointInGameArea()
+        cat.setScale(0)
+
+        addChild(cat)
+
+        do {
+            let appear = SKAction.scale(to: 1, duration: 0.5)
+            let wait = SKAction.wait(forDuration: 10)
+            let disappear = SKAction.scale(to: 0, duration: 0.5)
+            let remove = SKAction.removeFromParent()
+            let actions = [appear, wait, disappear, remove]
+
+            cat.run(SKAction.sequence(actions))
+        }
+    }
+
+    private func moveEnemy() {
+        let toPoint = randomPointInGameArea()
+
+        let duration = TimeInterval((toPoint - enemyNode.position).length / enemyMovePointsPerSec)
+
+        enemyNode.run(SKAction.move(to: toPoint, duration: duration)) { [weak self] in
+            self?.moveEnemy()
+        }
+    }
+
+    private func randomPointInGameArea() -> CGPoint {
+        return CGPoint(
+            x: CGFloat.random(min: gameArea.minX, max: gameArea.maxX),
+            y: CGFloat.random(min: gameArea.minY, max: gameArea.maxY)
+        )
     }
 
     // MARK: -
