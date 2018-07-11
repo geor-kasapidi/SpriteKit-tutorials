@@ -8,7 +8,7 @@ final class GameScene: SKScene {
 
     private let sceneBounds: CGRect
     private let gameArea: CGRect
-    private let enemyMovePointsPerSec: CGFloat = 320
+    private let enemyMovePointsPerSec: CGFloat = 200
     private let zombieMovePointsPerSec: CGFloat = 480
     private let zombieRotationRadiansPerSec: CGFloat = 4 * π
 
@@ -117,15 +117,26 @@ final class GameScene: SKScene {
         let cat = SKSpriteNode(imageNamed: "cat")
         cat.position = randomPointInGameArea()
         cat.setScale(0)
+        cat.zRotation = -π/16
 
         addChild(cat)
 
         do {
             let appear = SKAction.scale(to: 1, duration: 0.5)
-            let wait = SKAction.wait(forDuration: 10)
+            let wiggle: SKAction
+
+            do {
+                let leftWiggle = SKAction.rotate(byAngle: π/8, duration: 0.5)
+                let rightWiggle = leftWiggle.reversed()
+                let fullWiggle = SKAction.sequence([leftWiggle, rightWiggle])
+                let wiggleWait = SKAction.repeat(fullWiggle, count: 10)
+
+                wiggle = wiggleWait
+            }
+
             let disappear = SKAction.scale(to: 0, duration: 0.5)
             let remove = SKAction.removeFromParent()
-            let actions = [appear, wait, disappear, remove]
+            let actions = [appear, wiggle, disappear, remove]
 
             cat.run(SKAction.sequence(actions))
         }
