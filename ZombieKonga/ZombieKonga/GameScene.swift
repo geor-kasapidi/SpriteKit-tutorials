@@ -123,20 +123,21 @@ final class GameScene: SKScene {
 
         do {
             let appear = SKAction.scale(to: 1, duration: 0.5)
-            let wiggle: SKAction
-
+            let wiggleAndScale: SKAction
             do {
                 let leftWiggle = SKAction.rotate(byAngle: π/8, duration: 0.5)
                 let rightWiggle = leftWiggle.reversed()
                 let fullWiggle = SKAction.sequence([leftWiggle, rightWiggle])
-                let wiggleWait = SKAction.repeat(fullWiggle, count: 10)
 
-                wiggle = wiggleWait
+                let scaleUp = SKAction.scale(by: 1.2, duration: 0.25)
+                let scaleDown = scaleUp.reversed()
+                let fullScale = SKAction.sequence([scaleUp, scaleDown, scaleUp, scaleDown])
+
+                wiggleAndScale = SKAction.repeat(SKAction.group([fullScale, fullWiggle]), count: 10)
             }
-
             let disappear = SKAction.scale(to: 0, duration: 0.5)
             let remove = SKAction.removeFromParent()
-            let actions = [appear, wiggle, disappear, remove]
+            let actions = [appear, wiggleAndScale, disappear, remove]
 
             cat.run(SKAction.sequence(actions))
         }
