@@ -12,6 +12,8 @@ final class GameScene: SKScene {
     private let zombieMovePointsPerSec: CGFloat = 480
     private let zombieRotationRadiansPerSec: CGFloat = 4 * π
 
+    private lazy var hitCatSoundAction = SKAction.playSoundFileNamed("hitCat.wav", waitForCompletion: false)
+
     private var lastUpdateTime: TimeInterval = 0
     private var dt: TimeInterval = 0
     private var zombieVelocity: CGPoint = .zero
@@ -105,13 +107,28 @@ final class GameScene: SKScene {
     // MARK: -
 
     private func checkCollisions() {
-        enumerateChildNodes(withName: "cat") { [zombieNode] (catNode, _) in
+        enumerateChildNodes(withName: "cat") { [hitCatSoundAction, zombieNode] (catNode, _) in
             if catNode.frame.intersects(zombieNode.frame) {
-                let soundAction = SKAction.playSoundFileNamed("hitCat.wav", waitForCompletion: false)
-
-                catNode.run(SKAction.sequence([soundAction, SKAction.removeFromParent()]))
+                catNode.run(SKAction.sequence([hitCatSoundAction, SKAction.removeFromParent()]))
             }
         }
+
+        if enemyNode.frame.insetBy(dx: 20, dy: 20).intersects(zombieNode.frame) {
+            addBlinkActionToZombie()
+        }
+    }
+
+    private func addBlinkActionToZombie() {
+        guard zombieNode.action(forKey: "blink") == nil else {
+            return
+        }
+        
+        let blinkAction = SKAction.repeat(SKAction.sequence([SKAction.hide(),
+                                                             SKAction.wait(forDuration: 0.2),
+                                                             SKAction.unhide(),
+                                                             SKAction.wait(forDuration: 0.2)]), count: 5)
+        
+        zombieNode.run(blinkAction, withKey: "blink")
     }
 
     private func addAnimationToZombie() {
