@@ -4,6 +4,8 @@ import GameplayKit
 final class GameScene: SKScene {
     private let backgroundNode = SKSpriteNode(imageNamed: "background1")
     private let zombieNode = SKSpriteNode(imageNamed: "zombie1")
+    private let enemyNode = SKSpriteNode(imageNamed: "enemy")
+
     private let sceneBounds: CGRect
     private let zombieMovePointsPerSec: CGFloat = 480
     private let zombieRotationRadiansPerSec: CGFloat = 4 * π
@@ -41,9 +43,46 @@ final class GameScene: SKScene {
 
         do {
             zombieNode.zPosition = 1
-            zombieNode.position = center
+            zombieNode.position = CGPoint(x: 400, y: 400)
 
             addChild(zombieNode)
+        }
+
+        // add enemy
+
+        do {
+            enemyNode.zPosition = 2
+            enemyNode.position = CGPoint(x: size.width - 400, y: size.height - 400)
+
+            addChild(enemyNode)
+        }
+
+        // move enemy
+
+        do {
+            let size = self.size
+            let duration: TimeInterval = 2
+
+            let randomMov = SKAction.run { [enemyNode] in
+                let to = CGPoint(
+                    x: CGFloat.rnd(min: 100, max: size.width - 200),
+                    y: CGFloat.rnd(min: 100, max: size.height - 200)
+                )
+
+                let mov = SKAction.move(to: to, duration: duration)
+
+                enemyNode.run(mov)
+            }
+
+            let wait = SKAction.wait(forDuration: duration)
+
+            enemyNode.run(SKAction.repeatForever(SKAction.sequence([randomMov, wait])))
+        }
+
+        // animate zombie
+
+        do {
+
         }
     }
 
@@ -64,7 +103,25 @@ final class GameScene: SKScene {
         if distanceToTouchLocation < 5 {
             zombieVelocity = .zero
             lastTouchLocation = .zero
+
+            removeAnimationFromZombie()
         }
+    }
+
+    // MARK: -
+
+    private func addAnimationToZombie() {
+        guard zombieNode.action(forKey: "animation") == nil else {
+            return
+        }
+
+        let textures = [1,2,3,4,3,2].map { SKTexture(imageNamed: "zombie\($0)") }
+
+        zombieNode.run(SKAction.repeatForever(SKAction.animate(with: textures, timePerFrame: 0.1)), withKey: "animation")
+    }
+
+    private func removeAnimationFromZombie() {
+        zombieNode.removeAction(forKey: "animation")
     }
 
     // MARK: -
@@ -72,6 +129,8 @@ final class GameScene: SKScene {
     private func didTouch(_ touchLocation: CGPoint) {
         lastTouchLocation = touchLocation
         zombieVelocity = (touchLocation - zombieNode.position).normalize() * zombieMovePointsPerSec
+
+        addAnimationToZombie()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

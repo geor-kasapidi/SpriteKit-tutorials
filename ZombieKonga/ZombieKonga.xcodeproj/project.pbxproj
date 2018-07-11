@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		143A677E20F5164D0067FD24 /* GeometryUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A677D20F5164D0067FD24 /* GeometryUtils.swift */; };
+		DD68B92B20F5E93B0016CBE6 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD68B92A20F5E93B0016CBE6 /* Utils.swift */; };
 		DDBDD26320F4779F00649EAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBDD26220F4779F00649EAD /* AppDelegate.swift */; };
 		DDBDD26920F4779F00649EAD /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBDD26820F4779F00649EAD /* GameScene.swift */; };
 		DDBDD26B20F4779F00649EAD /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBDD26A20F4779F00649EAD /* GameViewController.swift */; };
@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		143A677D20F5164D0067FD24 /* GeometryUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryUtils.swift; sourceTree = "<group>"; };
+		DD68B92A20F5E93B0016CBE6 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		DDBDD25F20F4779F00649EAD /* ZombieKonga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZombieKonga.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDBDD26220F4779F00649EAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDBDD26820F4779F00649EAD /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -58,14 +58,14 @@
 		DDBDD26120F4779F00649EAD /* ZombieKonga */ = {
 			isa = PBXGroup;
 			children = (
+				DDBDD27420F477A000649EAD /* Info.plist */,
 				DDBDD26220F4779F00649EAD /* AppDelegate.swift */,
 				DDBDD26820F4779F00649EAD /* GameScene.swift */,
 				DDBDD26A20F4779F00649EAD /* GameViewController.swift */,
-				DDBDD26C20F4779F00649EAD /* Main.storyboard */,
+				DD68B92A20F5E93B0016CBE6 /* Utils.swift */,
 				DDBDD26F20F477A000649EAD /* Assets.xcassets */,
 				DDBDD27120F477A000649EAD /* LaunchScreen.storyboard */,
-				DDBDD27420F477A000649EAD /* Info.plist */,
-				143A677D20F5164D0067FD24 /* GeometryUtils.swift */,
+				DDBDD26C20F4779F00649EAD /* Main.storyboard */,
 			);
 			path = ZombieKonga;
 			sourceTree = "<group>";
@@ -141,8 +141,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD68B92B20F5E93B0016CBE6 /* Utils.swift in Sources */,
 				DDBDD26920F4779F00649EAD /* GameScene.swift in Sources */,
-				143A677E20F5164D0067FD24 /* GeometryUtils.swift in Sources */,
 				DDBDD26B20F4779F00649EAD /* GameViewController.swift in Sources */,
 				DDBDD26320F4779F00649EAD /* AppDelegate.swift in Sources */,
 			);

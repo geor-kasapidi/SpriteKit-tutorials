@@ -31,6 +31,10 @@ func - (a: Vector, b: Vector) -> Vector {
     return Vector(x: a.x - b.x, y: a.y - b.y)
 }
 
+func * (a: Vector, b: Vector) -> Vector {
+    return Vector(x: a.x * b.x, y: a.y * b.y)
+}
+
 // *******************************************************
 
 extension Vector {
@@ -58,8 +62,8 @@ final class GeometryUtils {
     static func shortestAngle(between angle1: CGFloat, and angle2: CGFloat) -> CGFloat {
         var angle = (angle2 - angle1).truncatingRemainder(dividingBy: ππ)
 
-        if angle > π { angle -= ππ }
-        if angle < -π { angle += ππ }
+        if angle >= π { angle -= ππ }
+        if angle <= -π { angle += ππ }
 
         return angle
     }
@@ -68,6 +72,20 @@ final class GeometryUtils {
 extension CGFloat {
     func sign() -> CGFloat {
         return self < 0 ? -1 : 1
+    }
+}
+
+// *******************************************************
+
+extension CGFloat {
+    static func random() -> CGFloat {
+        return CGFloat(Float(arc4random()) / Float(UInt32.max))
+    }
+
+    static func rnd(min: CGFloat, max: CGFloat) -> CGFloat {
+        assert(min < max)
+
+        return random() * (max - min) + min
     }
 }
 
