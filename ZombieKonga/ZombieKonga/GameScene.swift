@@ -54,6 +54,7 @@ final class GameScene: SKScene {
         // add enemy
 
         do {
+            enemyNode.name = "enemy"
             enemyNode.zPosition = 2
             enemyNode.position = CGPoint(x: size.width - 400, y: size.height - 400)
 
@@ -97,7 +98,21 @@ final class GameScene: SKScene {
         }
     }
 
+    override func didEvaluateActions() {
+        checkCollisions()
+    }
+
     // MARK: -
+
+    private func checkCollisions() {
+        enumerateChildNodes(withName: "cat") { [zombieNode] (catNode, _) in
+            if catNode.frame.intersects(zombieNode.frame) {
+                let soundAction = SKAction.playSoundFileNamed("hitCat.wav", waitForCompletion: false)
+
+                catNode.run(SKAction.sequence([soundAction, SKAction.removeFromParent()]))
+            }
+        }
+    }
 
     private func addAnimationToZombie() {
         guard zombieNode.action(forKey: "animation") == nil else {
@@ -115,6 +130,7 @@ final class GameScene: SKScene {
 
     private func addCat() {
         let cat = SKSpriteNode(imageNamed: "cat")
+        cat.name = "cat"
         cat.position = randomPointInGameArea()
         cat.setScale(0)
         cat.zRotation = -π/16

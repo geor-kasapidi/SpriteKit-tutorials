@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		143A678520F620F20067FD24 /* hitCat.wav in Resources */ = {isa = PBXBuildFile; fileRef = 143A678020F620F20067FD24 /* hitCat.wav */; };
+		143A678620F620F20067FD24 /* lose.wav in Resources */ = {isa = PBXBuildFile; fileRef = 143A678120F620F20067FD24 /* lose.wav */; };
+		143A678720F620F20067FD24 /* win.wav in Resources */ = {isa = PBXBuildFile; fileRef = 143A678220F620F20067FD24 /* win.wav */; };
+		143A678820F620F20067FD24 /* hitCatLady.wav in Resources */ = {isa = PBXBuildFile; fileRef = 143A678320F620F20067FD24 /* hitCatLady.wav */; };
+		143A678920F620F20067FD24 /* backgroundMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 143A678420F620F20067FD24 /* backgroundMusic.mp3 */; };
 		DD68B92B20F5E93B0016CBE6 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD68B92A20F5E93B0016CBE6 /* Utils.swift */; };
 		DDBDD26320F4779F00649EAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBDD26220F4779F00649EAD /* AppDelegate.swift */; };
 		DDBDD26920F4779F00649EAD /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBDD26820F4779F00649EAD /* GameScene.swift */; };
@@ -17,6 +22,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		143A678020F620F20067FD24 /* hitCat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hitCat.wav; sourceTree = "<group>"; };
+		143A678120F620F20067FD24 /* lose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lose.wav; sourceTree = "<group>"; };
+		143A678220F620F20067FD24 /* win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = win.wav; sourceTree = "<group>"; };
+		143A678320F620F20067FD24 /* hitCatLady.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hitCatLady.wav; sourceTree = "<group>"; };
+		143A678420F620F20067FD24 /* backgroundMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundMusic.mp3; sourceTree = "<group>"; };
 		DD68B92A20F5E93B0016CBE6 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		DDBDD25F20F4779F00649EAD /* ZombieKonga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZombieKonga.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDBDD26220F4779F00649EAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +49,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		143A677F20F620E70067FD24 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				143A678420F620F20067FD24 /* backgroundMusic.mp3 */,
+				143A678020F620F20067FD24 /* hitCat.wav */,
+				143A678320F620F20067FD24 /* hitCatLady.wav */,
+				143A678120F620F20067FD24 /* lose.wav */,
+				143A678220F620F20067FD24 /* win.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		DDBDD25620F4779F00649EAD = {
 			isa = PBXGroup;
 			children = (
@@ -58,6 +80,7 @@
 		DDBDD26120F4779F00649EAD /* ZombieKonga */ = {
 			isa = PBXGroup;
 			children = (
+				143A677F20F620E70067FD24 /* Sounds */,
 				DDBDD27420F477A000649EAD /* Info.plist */,
 				DDBDD26220F4779F00649EAD /* AppDelegate.swift */,
 				DDBDD26820F4779F00649EAD /* GameScene.swift */,
@@ -128,9 +151,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				143A678620F620F20067FD24 /* lose.wav in Resources */,
 				DDBDD26E20F4779F00649EAD /* Main.storyboard in Resources */,
+				143A678920F620F20067FD24 /* backgroundMusic.mp3 in Resources */,
 				DDBDD27020F477A000649EAD /* Assets.xcassets in Resources */,
+				143A678720F620F20067FD24 /* win.wav in Resources */,
 				DDBDD27320F477A000649EAD /* LaunchScreen.storyboard in Resources */,
+				143A678820F620F20067FD24 /* hitCatLady.wav in Resources */,
+				143A678520F620F20067FD24 /* hitCat.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,7 +249,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -275,7 +303,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -289,6 +317,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PT3B5FZTB8;
 				INFOPLIST_FILE = ZombieKonga/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -306,6 +335,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PT3B5FZTB8;
 				INFOPLIST_FILE = ZombieKonga/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
