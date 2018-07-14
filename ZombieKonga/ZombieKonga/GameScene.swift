@@ -10,14 +10,8 @@ final class GameScene: SKScene {
     private let gameArea: CGRect
     private let enemyMovePointsPerSec: CGFloat = 200
     private let zombieMovePointsPerSec: CGFloat = 480
-    private let zombieRotationRadiansPerSec: CGFloat = 4 * π
 
     private lazy var hitCatSoundAction = SKAction.playSoundFileNamed("hitCat.wav", waitForCompletion: false)
-
-    private var lastUpdateTime: TimeInterval = 0
-    private var dt: TimeInterval = 0
-    private var zombieVelocity: CGPoint = .zero
-    private var lastTouchLocation: CGPoint = .zero
 
     override init(size: CGSize) {
         sceneBounds = CGRect(origin: .zero, size: size)
@@ -80,31 +74,19 @@ final class GameScene: SKScene {
 
     // MARK: -
 
-    override func update(_ currentTime: TimeInterval) {
-        dt = lastUpdateTime > 0 ? currentTime - lastUpdateTime : 0
-        lastUpdateTime = currentTime
-
-        check(position: &zombieNode.position, velocity: &zombieVelocity, in: gameArea)
-
-        zombieNode.position = zombieNode.position + zombieVelocity * CGFloat(dt)
-
-        rotate(sprite: zombieNode, rotationRadiansPerSec: zombieRotationRadiansPerSec)
-
-        let distanceToTouchLocation = (lastTouchLocation - zombieNode.position).length
-
-        if distanceToTouchLocation < 5 {
-            zombieVelocity = .zero
-            lastTouchLocation = .zero
-
-            removeAnimationFromZombie()
-        }
-    }
-
     override func didEvaluateActions() {
         checkCollisions()
     }
 
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        touches.first.flatMap { didTouch($0.location(in: self)) }
+    }
+
     // MARK: -
+
+    private func didTouch(_ touchLocation: CGPoint) {
+        moveZombie(to: touchLocation)
+    }
 
     private func checkCollisions() {
         enumerateChildNodes(withName: "cat") { [hitCatSoundAction, zombieNode] (catNode, _) in
@@ -118,31 +100,11 @@ final class GameScene: SKScene {
         }
     }
 
-    private func addBlinkActionToZombie() {
-        guard zombieNode.action(forKey: "blink") == nil else {
-            return
-        }
-        
-        let blinkAction = SKAction.repeat(SKAction.sequence([SKAction.hide(),
-                                                             SKAction.wait(forDuration: 0.2),
-                                                             SKAction.unhide(),
-                                                             SKAction.wait(forDuration: 0.2)]), count: 5)
-        
-        zombieNode.run(blinkAction, withKey: "blink")
-    }
-
-    private func addAnimationToZombie() {
-        guard zombieNode.action(forKey: "animation") == nil else {
-            return
-        }
-
-        let textures = [1,2,3,4,3,2].map { SKTexture(imageNamed: "zombie\($0)") }
-
-        zombieNode.run(SKAction.repeatForever(SKAction.animate(with: textures, timePerFrame: 0.1)), withKey: "animation")
-    }
-
-    private func removeAnimationFromZombie() {
-        zombieNode.removeAction(forKey: "animation")
+    private func randomPointInGameArea() -> CGPoint {
+        return CGPoint(
+            x: CGFloat.random(min: gameArea.minX, max: gameArea.maxX),
+            y: CGFloat.random(min: gameArea.minY, max: gameArea.maxY)
+        )
     }
 
     private func addCat() {
@@ -186,57 +148,44 @@ final class GameScene: SKScene {
         }
     }
 
-    private func randomPointInGameArea() -> CGPoint {
-        return CGPoint(
-            x: CGFloat.random(min: gameArea.minX, max: gameArea.maxX),
-            y: CGFloat.random(min: gameArea.minY, max: gameArea.maxY)
-        )
+    private func addBlinkActionToZombie() {
+        guard zombieNode.action(forKey: "blink") == nil else {
+            return
+        }
+        
+        let blinkAction = SKAction.repeat(SKAction.sequence([SKAction.hide(),
+                                                             SKAction.wait(forDuration: 0.2),
+                                                             SKAction.unhide(),
+                                                             SKAction.wait(forDuration: 0.2)]), count: 5)
+        
+        zombieNode.run(blinkAction, withKey: "blink")
     }
 
-    // MARK: -
-
-    private func didTouch(_ touchLocation: CGPoint) {
-        lastTouchLocation = touchLocation
-        zombieVelocity = (touchLocation - zombieNode.position).normalize() * zombieMovePointsPerSec
-
-        addAnimationToZombie()
-    }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        touches.first.flatMap { didTouch($0.location(in: self)) }
-    }
-
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        touches.first.flatMap { didTouch($0.location(in: self)) }
-    }
-
-    // MARK: -
-
-    private func rotate(sprite: SKSpriteNode, rotationRadiansPerSec: CGFloat) {
-        let shortestAngle = GeometryUtils.shortestAngle(between: sprite.zRotation, and: zombieVelocity.angle)
-        let amountToRotate = min(rotationRadiansPerSec * CGFloat(dt), abs(shortestAngle))
-        sprite.zRotation += shortestAngle.sign() * amountToRotate
-    }
-
-    private func check(position: inout CGPoint, velocity: inout Vector, in bounds: CGRect) {
-        if position.x < bounds.minX {
-            position.x = bounds.minX
-            velocity.x = -velocity.x
+    private func addAnimationToZombie() {
+        guard zombieNode.action(forKey: "animation") == nil else {
+            return
         }
 
-        if position.y < bounds.minY {
-            position.y = bounds.minY
-            velocity.y = -velocity.y
-        }
+        let textures = [1,2,3,4,3,2].map { SKTexture(imageNamed: "zombie\($0)") }
 
-        if position.x > bounds.maxX {
-            position.x = bounds.maxX
-            velocity.x = -velocity.x
-        }
+        zombieNode.run(SKAction.repeatForever(SKAction.animate(with: textures, timePerFrame: 0.1)), withKey: "animation")
+    }
 
-        if position.y > bounds.maxY {
-            position.y = bounds.maxY
-            velocity.y = -velocity.y
-        }
+    private func removeAnimationFromZombie() {
+        zombieNode.removeAction(forKey: "animation")
+    }
+
+    private func moveZombie(to toPoint: CGPoint) {
+        let duration = TimeInterval((toPoint - zombieNode.position).length / zombieMovePointsPerSec)
+
+        let velocity = (toPoint - zombieNode.position).normalize() * zombieMovePointsPerSec
+
+        let rotation = GeometryUtils.shortestAngle(between: zombieNode.zRotation, and: velocity.angle)
+
+        zombieNode.removeAction(forKey: "move")
+        zombieNode.removeAction(forKey: "rotate")
+
+        zombieNode.run(SKAction.move(to: toPoint, duration: duration), withKey: "move")
+        zombieNode.run(SKAction.rotate(byAngle: rotation, duration: 0.2), withKey: "rotate")
     }
 }
