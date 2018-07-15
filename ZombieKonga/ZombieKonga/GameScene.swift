@@ -8,8 +8,13 @@ final class GameScene: SKScene {
 
     private let sceneBounds: CGRect
     private let gameArea: CGRect
-    private let enemyMovePointsPerSec: CGFloat = 200
-    private let zombieMovePointsPerSec: CGFloat = 480
+    private let enemySpeed: CGFloat = 200 // points per sec
+    private let zombieSpeed: CGFloat = 480 // points per sec
+
+    private var zombieCatNodes: [SKNode] = []
+
+    private var lastUpdateTime: TimeInterval = 0
+    private var dt: TimeInterval = 0
 
     private lazy var hitCatSoundAction = SKAction.playSoundFileNamed("hitCat.wav", waitForCompletion: false)
 
@@ -74,8 +79,15 @@ final class GameScene: SKScene {
 
     // MARK: -
 
+    override func update(_ currentTime: TimeInterval) {
+        dt = lastUpdateTime > 0 ? currentTime - lastUpdateTime : 0
+        lastUpdateTime = currentTime
+    }
+
     override func didEvaluateActions() {
         checkCollisions()
+
+        updateTrainPosition()
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -84,19 +96,43 @@ final class GameScene: SKScene {
 
     // MARK: -
 
-    private func didTouch(_ touchLocation: CGPoint) {
-        moveZombie(to: touchLocation)
+    private func didTouch(_ touchPoint: CGPoint) {
+        moveZombie(to: touchPoint)
     }
 
     private func checkCollisions() {
-        enumerateChildNodes(withName: "cat") { [hitCatSoundAction, zombieNode] (catNode, _) in
-            if catNode.frame.intersects(zombieNode.frame) {
-                catNode.run(SKAction.sequence([hitCatSoundAction, SKAction.removeFromParent()]))
+        enumerateChildNodes(withName: "cat") { (catNode, _) in
+            if catNode.frame.intersects(self.zombieNode.frame) {
+                if !self.makeCatZombie(catNode) {
+                    self.removeCat(node: catNode)
+                }
             }
         }
 
         if enemyNode.frame.insetBy(dx: 20, dy: 20).intersects(zombieNode.frame) {
-            addBlinkActionToZombie()
+            if addBlinkActionToZombie() {
+                removeLastZombieCat()
+            }
+        }
+    }
+
+    private func updateTrainPosition() {
+        var frontNode: SKNode = zombieNode
+
+        for node in zombieCatNodes {
+            let distance = frontNode.position - node.position
+
+            let distanceWithOffset = frontNode.position - distance.normalize() * 200 - node.position
+
+            if distanceWithOffset.length > 5 {
+                let amountToMove = distanceWithOffset.normalize() * self.zombieSpeed * CGFloat(self.dt)
+
+                node.position = node.position + amountToMove
+            }
+
+            node.zRotation = distance.angle
+
+            frontNode = node
         }
     }
 
@@ -141,16 +177,16 @@ final class GameScene: SKScene {
     private func moveEnemy() {
         let toPoint = randomPointInGameArea()
 
-        let duration = TimeInterval((toPoint - enemyNode.position).length / enemyMovePointsPerSec)
+        let duration = TimeInterval((toPoint - enemyNode.position).length / enemySpeed)
 
         enemyNode.run(SKAction.move(to: toPoint, duration: duration)) { [weak self] in
             self?.moveEnemy()
         }
     }
 
-    private func addBlinkActionToZombie() {
+    private func addBlinkActionToZombie() -> Bool {
         guard zombieNode.action(forKey: "blink") == nil else {
-            return
+            return false
         }
         
         let blinkAction = SKAction.repeat(SKAction.sequence([SKAction.hide(),
@@ -159,6 +195,8 @@ final class GameScene: SKScene {
                                                              SKAction.wait(forDuration: 0.2)]), count: 5)
         
         zombieNode.run(blinkAction, withKey: "blink")
+
+        return true
     }
 
     private func addAnimationToZombie() {
@@ -176,16 +214,53 @@ final class GameScene: SKScene {
     }
 
     private func moveZombie(to toPoint: CGPoint) {
-        let duration = TimeInterval((toPoint - zombieNode.position).length / zombieMovePointsPerSec)
+        let distance = toPoint - zombieNode.position
 
-        let velocity = (toPoint - zombieNode.position).normalize() * zombieMovePointsPerSec
+        let duration = TimeInterval(distance.length / zombieSpeed)
 
-        let rotation = GeometryUtils.shortestAngle(between: zombieNode.zRotation, and: velocity.angle)
+        let rotation = GeometryUtils.shortestAngle(between: zombieNode.zRotation, and: distance.angle)
 
         zombieNode.removeAction(forKey: "move")
-        zombieNode.removeAction(forKey: "rotate")
 
-        zombieNode.run(SKAction.move(to: toPoint, duration: duration), withKey: "move")
-        zombieNode.run(SKAction.rotate(byAngle: rotation, duration: 0.2), withKey: "rotate")
+        zombieNode.run(SKAction.group([SKAction.move(to: toPoint, duration: duration),
+                                       SKAction.rotate(byAngle: rotation, duration: 0.2)]), withKey: "move")
+    }
+
+    private func makeCatZombie(_ catNode: SKNode) -> Bool {
+        guard zombieCatNodes.count < 5 else {
+            return false
+        }
+
+        catNode.name = "zombie_cat"
+
+        catNode.removeAllActions()
+
+        catNode.run(SKAction.group([hitCatSoundAction,
+                                    SKAction.colorize(with: #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1), colorBlendFactor: 0.5, duration: 0.2),
+                                    SKAction.scale(to: 1, duration: 0.2)]))
+
+        zombieCatNodes.append(catNode)
+
+        return true
+    }
+
+    private func removeCat(node: SKNode) {
+        node.name = "dead_cat"
+
+        node.removeAllActions()
+
+        node.run(SKAction.sequence([SKAction.scale(to: 0, duration: 0.5),
+                                    SKAction.removeFromParent()]))
+    }
+
+    private func removeLastZombieCat() {
+        guard !zombieCatNodes.isEmpty else {
+            return
+        }
+
+        let node = zombieCatNodes.removeFirst()
+
+        node.run(SKAction.sequence([SKAction.scale(to: 0, duration: 0.5),
+                                    SKAction.removeFromParent()]))
     }
 }

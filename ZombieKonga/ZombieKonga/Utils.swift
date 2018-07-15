@@ -18,7 +18,7 @@ func * (a: Vector, b: CGFloat) -> Vector {
 }
 
 func / (a: Vector, b: CGFloat) -> Vector {
-    return Vector(x: a.x / b, y: a.y / b)
+    return b.isZero ? .zero : Vector(x: a.x / b, y: a.y / b)
 }
 
 // *******************************************************
