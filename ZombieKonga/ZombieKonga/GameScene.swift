@@ -199,30 +199,27 @@ final class GameScene: SKScene {
         return true
     }
 
-    private func addAnimationToZombie() {
-        guard zombieNode.action(forKey: "animation") == nil else {
-            return
-        }
-
-        let textures = [1,2,3,4,3,2].map { SKTexture(imageNamed: "zombie\($0)") }
-
-        zombieNode.run(SKAction.repeatForever(SKAction.animate(with: textures, timePerFrame: 0.1)), withKey: "animation")
-    }
-
-    private func removeAnimationFromZombie() {
-        zombieNode.removeAction(forKey: "animation")
-    }
-
     private func moveZombie(to toPoint: CGPoint) {
         let distance = toPoint - zombieNode.position
-
+        
         let duration = TimeInterval(distance.length / zombieSpeed)
-
+        
         let rotation = GeometryUtils.shortestAngle(between: zombieNode.zRotation, and: distance.angle)
-
+        
         zombieNode.removeAction(forKey: "move")
-
-        zombieNode.run(SKAction.group([SKAction.move(to: toPoint, duration: duration),
+        
+        let animateAction: SKAction
+        
+        do {
+            let textures = [1,2,3,4,3,2].map { SKTexture(imageNamed: "zombie\($0)") }
+            let timePerFrame: TimeInterval = 0.1
+            let repeatCount = Int((duration / (TimeInterval(textures.count) * timePerFrame)).rounded(.up))
+            
+            animateAction = SKAction.repeat(SKAction.animate(with: textures, timePerFrame: timePerFrame), count: repeatCount)
+        }
+        
+        zombieNode.run(SKAction.group([animateAction,
+                                       SKAction.move(to: toPoint, duration: duration),
                                        SKAction.rotate(byAngle: rotation, duration: 0.2)]), withKey: "move")
     }
 
