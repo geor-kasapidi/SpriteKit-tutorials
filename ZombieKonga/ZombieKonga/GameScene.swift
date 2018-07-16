@@ -8,10 +8,12 @@ final class GameScene: SKScene {
 
     private let sceneBounds: CGRect
     private let gameArea: CGRect
-    private let enemySpeed: CGFloat = 200 // points per sec
+    private let enemySpeed: CGFloat = 640 // points per sec
     private let zombieSpeed: CGFloat = 480 // points per sec
 
     private var zombieCatNodes: [SKNode] = []
+
+    private var zombieLives: Int = 3
 
     private var lastUpdateTime: TimeInterval = 0
     private var dt: TimeInterval = 0
@@ -73,7 +75,7 @@ final class GameScene: SKScene {
                 self?.addCat()
             }
 
-            run(SKAction.repeatForever(SKAction.sequence([addCat, SKAction.wait(forDuration: 1)])))
+            run(SKAction.repeatForever(SKAction.sequence([addCat, SKAction.wait(forDuration: 3)])))
         }
     }
 
@@ -88,6 +90,12 @@ final class GameScene: SKScene {
         checkCollisions()
 
         updateTrainPosition()
+
+        guard zombieLives == 0 else {
+            return
+        }
+
+        showYouLoseScene()
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -111,7 +119,9 @@ final class GameScene: SKScene {
 
         if enemyNode.frame.insetBy(dx: 20, dy: 20).intersects(zombieNode.frame) {
             if addBlinkActionToZombie() {
-                removeLastZombieCat()
+                if !removeLastZombieCat() {
+                    zombieLives -= 1
+                }
             }
         }
     }
@@ -250,14 +260,23 @@ final class GameScene: SKScene {
                                     SKAction.removeFromParent()]))
     }
 
-    private func removeLastZombieCat() {
+    private func removeLastZombieCat() -> Bool {
         guard !zombieCatNodes.isEmpty else {
-            return
+            return false
         }
 
-        let node = zombieCatNodes.removeFirst()
+        let node = zombieCatNodes.removeLast()
 
         node.run(SKAction.sequence([SKAction.scale(to: 0, duration: 0.5),
                                     SKAction.removeFromParent()]))
+
+        return true
+    }
+
+    private func showYouLoseScene() {
+        let scene = YouLoseScene(size: size)
+        scene.scaleMode = scaleMode
+
+        view?.presentScene(scene, transition: SKTransition.flipHorizontal(withDuration: 0.5))
     }
 }
