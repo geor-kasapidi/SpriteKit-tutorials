@@ -24,11 +24,11 @@ final class GameScene: SKScene {
     private let zombieNode = SKSpriteNode(imageNamed: "zombie1")
     private let enemyNode = SKSpriteNode(imageNamed: "enemy")
     private let cameraNode = SKCameraNode()
+    
+    private let enemySpeed: CGFloat = 600 // points per sec
+    private let zombieSpeed: CGFloat = 500 // points per sec
 
-    private let sceneBounds: CGRect
-    private let gameArea: CGRect
-    private let enemySpeed: CGFloat = 640 // points per sec
-    private let zombieSpeed: CGFloat = 480 // points per sec
+    private var gameArea: CGRect = .zero
 
     private var zombieCatNodes: [SKNode] = []
 
@@ -38,17 +38,6 @@ final class GameScene: SKScene {
     private var dt: TimeInterval = 0
 
     private lazy var hitCatSoundAction = SKAction.playSoundFileNamed("hitCat.wav", waitForCompletion: false)
-
-    override init(size: CGSize) {
-        sceneBounds = CGRect(origin: .zero, size: size)
-        gameArea = sceneBounds.insetBy(dx: 200, dy: 200)
-
-        super.init(size: size)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError()
-    }
 
     override func didMove(to view: SKView) {
         backgroundColor = SKColor.black
@@ -168,6 +157,8 @@ final class GameScene: SKScene {
 
     private func updateCameraPosition() {
         cameraNode.position.x = zombieNode.position.x
+
+        gameArea = cameraNode.rectWith(size: size).insetBy(dx: 200, dy: 200)
     }
 
     private func updateBackgroundPosition() {

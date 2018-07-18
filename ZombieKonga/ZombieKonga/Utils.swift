@@ -83,7 +83,7 @@ extension CGFloat {
     }
 
     static func random(min: CGFloat, max: CGFloat) -> CGFloat {
-        assert(min < max)
+        assert(min <= max)
 
         return random() * (max - min) + min
     }
