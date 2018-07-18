@@ -1,10 +1,29 @@
 import SpriteKit
 import GameplayKit
 
+extension SKNode {
+    func rectWith(size: CGSize) -> CGRect {
+        return CGRect(
+            x: position.x - size.width / 2,
+            y: position.y - size.height / 2,
+            width: size.width,
+            height: size.height
+        )
+    }
+}
+
+extension SKSpriteNode {
+    var rect: CGRect {
+        return rectWith(size: size)
+    }
+}
+
 final class GameScene: SKScene {
-    private let backgroundNode = SKSpriteNode(imageNamed: "background1")
+    private let firstBackgroundNode = SKSpriteNode(imageNamed: "background1")
+    private let secondBackgroundNode = SKSpriteNode(imageNamed: "background2")
     private let zombieNode = SKSpriteNode(imageNamed: "zombie1")
     private let enemyNode = SKSpriteNode(imageNamed: "enemy")
+    private let cameraNode = SKCameraNode()
 
     private let sceneBounds: CGRect
     private let gameArea: CGRect
@@ -39,10 +58,17 @@ final class GameScene: SKScene {
         // add background
 
         do {
-            backgroundNode.zPosition = -1
-            backgroundNode.position = center
+            firstBackgroundNode.zPosition = -1
+            firstBackgroundNode.position = center
 
-            addChild(backgroundNode)
+            addChild(firstBackgroundNode)
+        }
+
+        do {
+            secondBackgroundNode.zPosition = -2
+            secondBackgroundNode.position = center
+
+            addChild(secondBackgroundNode)
         }
 
         // add zombie
@@ -62,6 +88,16 @@ final class GameScene: SKScene {
             enemyNode.position = CGPoint(x: size.width - 400, y: size.height - 400)
 
             addChild(enemyNode)
+        }
+
+        // add camera
+
+        do {
+            cameraNode.position = center
+
+            addChild(cameraNode)
+
+            camera = cameraNode
         }
 
         // move enemy
@@ -87,6 +123,10 @@ final class GameScene: SKScene {
     }
 
     override func didEvaluateActions() {
+        updateCameraPosition()
+
+        updateBackgroundPosition()
+
         checkCollisions()
 
         updateTrainPosition()
@@ -124,6 +164,14 @@ final class GameScene: SKScene {
                 }
             }
         }
+    }
+
+    private func updateCameraPosition() {
+        cameraNode.position.x = zombieNode.position.x
+    }
+
+    private func updateBackgroundPosition() {
+        // TODO:
     }
 
     private func updateTrainPosition() {
