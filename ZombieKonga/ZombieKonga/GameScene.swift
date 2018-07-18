@@ -25,7 +25,7 @@ final class GameScene: SKScene {
     private let enemyNode = SKSpriteNode(imageNamed: "enemy")
     private let cameraNode = SKCameraNode()
     
-    private let enemySpeed: CGFloat = 600 // points per sec
+    private let enemySpeed: CGFloat = 1000 // points per sec
     private let zombieSpeed: CGFloat = 500 // points per sec
 
     private var gameArea: CGRect = .zero
@@ -146,7 +146,7 @@ final class GameScene: SKScene {
             }
         }
 
-        if enemyNode.frame.insetBy(dx: 20, dy: 20).intersects(zombieNode.frame) {
+        if enemyNode.frame.insetBy(dx: 50, dy: 50).intersects(zombieNode.frame) {
             if addBlinkActionToZombie() {
                 if !removeLastZombieCat() {
                     zombieLives -= 1
@@ -162,7 +162,17 @@ final class GameScene: SKScene {
     }
 
     private func updateBackgroundPosition() {
-        // TODO:
+        if firstBackgroundNode.position.x > cameraNode.position.x {
+            secondBackgroundNode.position.x = firstBackgroundNode.position.x - size.width
+        } else {
+            secondBackgroundNode.position.x = firstBackgroundNode.position.x + size.width
+        }
+
+        if secondBackgroundNode.position.x > cameraNode.position.x {
+            firstBackgroundNode.position.x = secondBackgroundNode.position.x - size.width
+        } else {
+            firstBackgroundNode.position.x = secondBackgroundNode.position.x + size.width
+        }
     }
 
     private func updateTrainPosition() {
@@ -227,6 +237,8 @@ final class GameScene: SKScene {
         let toPoint = randomPointInGameArea()
 
         let duration = TimeInterval((toPoint - enemyNode.position).length / enemySpeed)
+
+        enemyNode.zRotation = (enemyNode.position - toPoint).angle
 
         enemyNode.run(SKAction.move(to: toPoint, duration: duration)) { [weak self] in
             self?.moveEnemy()
