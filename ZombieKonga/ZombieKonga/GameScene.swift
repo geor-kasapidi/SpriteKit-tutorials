@@ -1,7 +1,7 @@
 import SpriteKit
 import GameplayKit
 
-extension SKNode {
+extension SKCameraNode {
     func rectWith(size: CGSize) -> CGRect {
         return CGRect(
             x: position.x - size.width / 2,
@@ -12,17 +12,12 @@ extension SKNode {
     }
 }
 
-extension SKSpriteNode {
-    var rect: CGRect {
-        return rectWith(size: size)
-    }
-}
-
 final class GameScene: SKScene {
     private let firstBackgroundNode = SKSpriteNode(imageNamed: "background1")
     private let secondBackgroundNode = SKSpriteNode(imageNamed: "background2")
     private let zombieNode = SKSpriteNode(imageNamed: "zombie1")
     private let enemyNode = SKSpriteNode(imageNamed: "enemy")
+    private let livesTextNode = SKLabelNode(fontNamed: "BradleyHandITCTT-Bold")
     private let cameraNode = SKCameraNode()
     
     private let enemySpeed: CGFloat = 1000 // points per sec
@@ -32,7 +27,11 @@ final class GameScene: SKScene {
 
     private var zombieCatNodes: [SKNode] = []
 
-    private var zombieLives: Int = 3
+    private var zombieLives: Int = 3 {
+        didSet {
+            livesTextNode.text = "Lives: \(zombieLives)"
+        }
+    }
 
     private var lastUpdateTime: TimeInterval = 0
     private var dt: TimeInterval = 0
@@ -89,6 +88,22 @@ final class GameScene: SKScene {
             camera = cameraNode
         }
 
+        // add lives label
+
+        do {
+            livesTextNode.position = CGPoint(
+                x: -size.width/2 + 20,
+                y: -size.height/2 + 20
+            )
+
+            livesTextNode.horizontalAlignmentMode = .left
+            livesTextNode.verticalAlignmentMode = .bottom
+            livesTextNode.fontSize = 100
+            livesTextNode.fontColor = UIColor.white
+
+            cameraNode.addChild(livesTextNode)
+        }
+
         // move enemy
 
         moveEnemy()
@@ -102,6 +117,10 @@ final class GameScene: SKScene {
 
             run(SKAction.repeatForever(SKAction.sequence([addCat, SKAction.wait(forDuration: 3)])))
         }
+
+        // setup
+
+        zombieLives = 3
     }
 
     // MARK: -
