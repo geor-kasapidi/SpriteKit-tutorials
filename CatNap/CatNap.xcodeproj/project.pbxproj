@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		146D353B210E4F5800E4B220 /* CatCurl.sks in Resources */ = {isa = PBXBuildFile; fileRef = 146D353A210E4F5800E4B220 /* CatCurl.sks */; };
+		146D353D210E505E00E4B220 /* CatWakeUp.sks in Resources */ = {isa = PBXBuildFile; fileRef = 146D353C210E505E00E4B220 /* CatWakeUp.sks */; };
 		14C4643321048D55009757CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4643221048D55009757CB /* AppDelegate.swift */; };
 		14C4643521048D55009757CB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 14C4643421048D55009757CB /* GameScene.sks */; };
 		14C4643B21048D55009757CB /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4643A21048D55009757CB /* GameViewController.swift */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		146D353A210E4F5800E4B220 /* CatCurl.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CatCurl.sks; sourceTree = "<group>"; };
+		146D353C210E505E00E4B220 /* CatWakeUp.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CatWakeUp.sks; sourceTree = "<group>"; };
 		14C4642F21048D55009757CB /* CatNap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatNap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14C4643221048D55009757CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14C4643421048D55009757CB /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -97,6 +101,8 @@
 			children = (
 				14C4643421048D55009757CB /* GameScene.sks */,
 				14C4646021049991009757CB /* Cat.sks */,
+				146D353A210E4F5800E4B220 /* CatCurl.sks */,
+				146D353C210E505E00E4B220 /* CatWakeUp.sks */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -162,11 +168,13 @@
 				14C4643E21048D55009757CB /* Main.storyboard in Resources */,
 				14C4643521048D55009757CB /* GameScene.sks in Resources */,
 				14C4645D21048E86009757CB /* backgroundMusic.mp3 in Resources */,
+				146D353B210E4F5800E4B220 /* CatCurl.sks in Resources */,
 				14C4644021048D55009757CB /* Assets.xcassets in Resources */,
 				14C4644321048D55009757CB /* LaunchScreen.storyboard in Resources */,
 				14C4645E21048E86009757CB /* win.mp3 in Resources */,
 				14C4645C21048E86009757CB /* pop.mp3 in Resources */,
 				14C4645B21048E86009757CB /* mrreow.mp3 in Resources */,
+				146D353D210E505E00E4B220 /* CatWakeUp.sks in Resources */,
 				14C4645A21048E86009757CB /* lose.mp3 in Resources */,
 				14C4646121049991009757CB /* Cat.sks in Resources */,
 			);
