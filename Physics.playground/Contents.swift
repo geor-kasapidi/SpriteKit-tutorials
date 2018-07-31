@@ -34,7 +34,14 @@ do {
     shape.name = "shape"
     shape.position = CGPoint(x: size.width * 0.5, y: size.height * 0.5)
     shape.physicsBody = SKPhysicsBody(circleOfRadius: shape.size.width/2)
+    shape.physicsBody?.isDynamic = false
+    shape.physicsBody?.density = 100
     scene.addChild(shape)
+    
+    shape.run(SKAction.repeatForever(SKAction.sequence([
+        SKAction.move(to: CGPoint(x: 0.8 * size.width, y: size.height * 0.5), duration: 2),
+        SKAction.move(to: CGPoint(x: 0.2 * size.width, y: size.height * 0.5), duration: 2)
+        ])))
 }
 
 // triangle
@@ -82,11 +89,29 @@ do {
     }
 }
 
-DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
+var windDirection = -1
+
+func switchWindDirection() {
+    windDirection = -windDirection
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        switchWindDirection()
+    }
+}
+
+func makeWindy() {
     scene.enumerateChildNodes(withName: "sand", using: { (node, _) in
-        node.physicsBody?.applyForce(CGVector(dx: 50, dy: 0))
-//        node.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 20 + CGFloat(drand48()) * 40))
+        node.physicsBody?.applyForce(CGVector(dx: 50 * windDirection, dy: 0))
     })
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        makeWindy()
+    }
+}
+
+DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
+    switchWindDirection()
+    makeWindy()
 }
 
 PlaygroundPage.current.needsIndefiniteExecution = true
