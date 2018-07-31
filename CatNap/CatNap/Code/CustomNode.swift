@@ -1,0 +1,3 @@
+protocol CustomNode {
+    func didMoveToScene()
+}
