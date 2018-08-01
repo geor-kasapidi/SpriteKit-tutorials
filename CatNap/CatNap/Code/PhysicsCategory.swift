@@ -5,4 +5,5 @@ struct PhysicsCategory {
     static let bed: UInt32 = 0b100
     static let edge: UInt32 = 0b1000
     static let label: UInt32 = 0b10000
+    static let spring: UInt32 = 0b100000
 }
