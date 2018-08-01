@@ -8,5 +8,19 @@ final class CatNode: SKSpriteNode, CustomNode {
         physicsBody?.categoryBitMask = PhysicsCategory.cat
         physicsBody?.collisionBitMask = PhysicsCategory.block | PhysicsCategory.edge
         physicsBody?.contactTestBitMask = PhysicsCategory.edge | PhysicsCategory.bed
+        
+        isAwake = false
+    }
+    
+    var isAwake: Bool = false {
+        didSet {
+            children.forEach { node in
+                if node.name == "cat_awake" {
+                    node.isHidden = !isAwake
+                } else {
+                    node.isHidden = isAwake
+                }
+            }
+        }
     }
 }
