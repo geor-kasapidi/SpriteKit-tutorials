@@ -6,4 +6,5 @@ struct PhysicsCategory {
     static let edge: UInt32 = 0b1000
     static let label: UInt32 = 0b10000
     static let spring: UInt32 = 0b100000
+    static let hook: UInt32 = 0b1000000
 }

@@ -23,4 +23,16 @@ final class CatNode: SKSpriteNode, CustomNode {
             }
         }
     }
+    
+    var onTap: (() -> Void)? {
+        didSet {
+            isUserInteractionEnabled = true
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        
+        onTap?()
+    }
 }

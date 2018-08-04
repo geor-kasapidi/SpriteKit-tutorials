@@ -17,7 +17,7 @@ final class SpringNode: SKSpriteNode, CustomNode {
     private func onTap() {
         isUserInteractionEnabled = false
         
-        physicsBody?.applyImpulse(CGVector(dx: 0, dy: 250), at: CGPoint(x: size.width/2, y: size.height))
+        physicsBody?.applyImpulse(CGVector(dx: 0, dy: 400), at: CGPoint(x: size.width/2, y: size.height))
         
         run(SKAction.sequence([
             SKAction.wait(forDuration: 1),
