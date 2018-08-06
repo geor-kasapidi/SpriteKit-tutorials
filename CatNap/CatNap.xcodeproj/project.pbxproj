@@ -20,6 +20,8 @@
 		14B991422112560F00F87FC1 /* SpringNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B991412112560F00F87FC1 /* SpringNode.swift */; };
 		14B991442112563C00F87FC1 /* BaseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B991432112563C00F87FC1 /* BaseScene.swift */; };
 		14B991482114F64B00F87FC1 /* Hook.sks in Resources */ = {isa = PBXBuildFile; fileRef = 14B991472114F64B00F87FC1 /* Hook.sks */; };
+		14B9914C2118E56100F87FC1 /* GameScene3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B9914B2118E56100F87FC1 /* GameScene3.swift */; };
+		14B991502118E72A00F87FC1 /* GameScene3.sks in Resources */ = {isa = PBXBuildFile; fileRef = 14B9914F2118E72A00F87FC1 /* GameScene3.sks */; };
 		14C4643321048D55009757CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4643221048D55009757CB /* AppDelegate.swift */; };
 		14C4643521048D55009757CB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 14C4643421048D55009757CB /* GameScene.sks */; };
 		14C4643B21048D55009757CB /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4643A21048D55009757CB /* GameViewController.swift */; };
@@ -48,6 +50,8 @@
 		14B991412112560F00F87FC1 /* SpringNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringNode.swift; sourceTree = "<group>"; };
 		14B991432112563C00F87FC1 /* BaseScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScene.swift; sourceTree = "<group>"; };
 		14B991472114F64B00F87FC1 /* Hook.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Hook.sks; sourceTree = "<group>"; };
+		14B9914B2118E56100F87FC1 /* GameScene3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene3.swift; sourceTree = "<group>"; };
+		14B9914F2118E72A00F87FC1 /* GameScene3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene3.sks; sourceTree = "<group>"; };
 		14C4642F21048D55009757CB /* CatNap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatNap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14C4643221048D55009757CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14C4643421048D55009757CB /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -85,6 +89,7 @@
 				14B9912F2110F0A700F87FC1 /* CustomNode.swift */,
 				14B9912B2110ECCF00F87FC1 /* GameScene.swift */,
 				14B9913F21124DD100F87FC1 /* GameScene2.swift */,
+				14B9914B2118E56100F87FC1 /* GameScene3.swift */,
 				14B991372111F48900F87FC1 /* MessageNode.swift */,
 				14B991332111089E00F87FC1 /* PhysicsCategory.swift */,
 				14B991412112560F00F87FC1 /* SpringNode.swift */,
@@ -139,10 +144,11 @@
 		14C4645F21049968009757CB /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				14C4643421048D55009757CB /* GameScene.sks */,
 				14C4646021049991009757CB /* Cat.sks */,
 				146D353A210E4F5800E4B220 /* CatCurl.sks */,
+				14C4643421048D55009757CB /* GameScene.sks */,
 				14B9913D21124D0C00F87FC1 /* GameScene2.sks */,
+				14B9914F2118E72A00F87FC1 /* GameScene3.sks */,
 				14B991472114F64B00F87FC1 /* Hook.sks */,
 			);
 			path = Scenes;
@@ -210,6 +216,7 @@
 				14C4643521048D55009757CB /* GameScene.sks in Resources */,
 				14C4645D21048E86009757CB /* backgroundMusic.mp3 in Resources */,
 				14B991482114F64B00F87FC1 /* Hook.sks in Resources */,
+				14B991502118E72A00F87FC1 /* GameScene3.sks in Resources */,
 				146D353B210E4F5800E4B220 /* CatCurl.sks in Resources */,
 				14C4644021048D55009757CB /* Assets.xcassets in Resources */,
 				14C4644321048D55009757CB /* LaunchScreen.storyboard in Resources */,
@@ -233,6 +240,7 @@
 				14B9912E2110EF8E00F87FC1 /* BedNode.swift in Sources */,
 				14B991302110F0A700F87FC1 /* CustomNode.swift in Sources */,
 				14B9914021124DD100F87FC1 /* GameScene2.swift in Sources */,
+				14B9914C2118E56100F87FC1 /* GameScene3.swift in Sources */,
 				14B99136211109A700F87FC1 /* BlockNode.swift in Sources */,
 				14B991382111F48900F87FC1 /* MessageNode.swift in Sources */,
 				14C4643B21048D55009757CB /* GameViewController.swift in Sources */,
