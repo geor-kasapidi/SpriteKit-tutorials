@@ -7,7 +7,7 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let scene = GameScene3(fileNamed: "GameScene3")!
+        let scene = GameScene4(fileNamed: "GameScene4")!
         scene.scaleMode = .aspectFill
         skView.presentScene(scene)
 
