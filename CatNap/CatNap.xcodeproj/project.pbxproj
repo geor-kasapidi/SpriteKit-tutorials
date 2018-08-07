@@ -19,23 +19,22 @@
 		14B9914021124DD100F87FC1 /* GameScene2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B9913F21124DD100F87FC1 /* GameScene2.swift */; };
 		14B991422112560F00F87FC1 /* SpringNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B991412112560F00F87FC1 /* SpringNode.swift */; };
 		14B991442112563C00F87FC1 /* BaseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B991432112563C00F87FC1 /* BaseScene.swift */; };
-		14B991482114F64B00F87FC1 /* Hook.sks in Resources */ = {isa = PBXBuildFile; fileRef = 14B991472114F64B00F87FC1 /* Hook.sks */; };
 		14B9914C2118E56100F87FC1 /* GameScene3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B9914B2118E56100F87FC1 /* GameScene3.swift */; };
 		14B991502118E72A00F87FC1 /* GameScene3.sks in Resources */ = {isa = PBXBuildFile; fileRef = 14B9914F2118E72A00F87FC1 /* GameScene3.sks */; };
 		14B991542118F3F400F87FC1 /* GameScene4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B991532118F3F400F87FC1 /* GameScene4.swift */; };
 		14B991562118F43400F87FC1 /* GameScene4.sks in Resources */ = {isa = PBXBuildFile; fileRef = 14B991552118F43400F87FC1 /* GameScene4.sks */; };
 		14B991582118F60F00F87FC1 /* SeesawNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B991572118F60F00F87FC1 /* SeesawNode.swift */; };
+		14B9915A211A3A7700F87FC1 /* GameScene5.sks in Resources */ = {isa = PBXBuildFile; fileRef = 14B99159211A3A7700F87FC1 /* GameScene5.sks */; };
+		14B9915C211A3CDB00F87FC1 /* GameScene5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B9915B211A3CDB00F87FC1 /* GameScene5.swift */; };
+		14B9915E211A426B00F87FC1 /* PictureNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B9915D211A426B00F87FC1 /* PictureNode.swift */; };
+		14B99161211A43A100F87FC1 /* discolights-loop.mov in Resources */ = {isa = PBXBuildFile; fileRef = 14B99160211A43A100F87FC1 /* discolights-loop.mov */; };
 		14C4643321048D55009757CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4643221048D55009757CB /* AppDelegate.swift */; };
 		14C4643521048D55009757CB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 14C4643421048D55009757CB /* GameScene.sks */; };
 		14C4643B21048D55009757CB /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4643A21048D55009757CB /* GameViewController.swift */; };
 		14C4643E21048D55009757CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14C4643C21048D55009757CB /* Main.storyboard */; };
 		14C4644021048D55009757CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14C4643F21048D55009757CB /* Assets.xcassets */; };
 		14C4644321048D55009757CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14C4644121048D55009757CB /* LaunchScreen.storyboard */; };
-		14C4645A21048E86009757CB /* lose.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 14C4645521048E85009757CB /* lose.mp3 */; };
 		14C4645B21048E86009757CB /* mrreow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 14C4645621048E85009757CB /* mrreow.mp3 */; };
-		14C4645C21048E86009757CB /* pop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 14C4645721048E85009757CB /* pop.mp3 */; };
-		14C4645D21048E86009757CB /* backgroundMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 14C4645821048E86009757CB /* backgroundMusic.mp3 */; };
-		14C4645E21048E86009757CB /* win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 14C4645921048E86009757CB /* win.mp3 */; };
 		14C4646121049991009757CB /* Cat.sks in Resources */ = {isa = PBXBuildFile; fileRef = 14C4646021049991009757CB /* Cat.sks */; };
 /* End PBXBuildFile section */
 
@@ -52,12 +51,15 @@
 		14B9913F21124DD100F87FC1 /* GameScene2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene2.swift; sourceTree = "<group>"; };
 		14B991412112560F00F87FC1 /* SpringNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringNode.swift; sourceTree = "<group>"; };
 		14B991432112563C00F87FC1 /* BaseScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScene.swift; sourceTree = "<group>"; };
-		14B991472114F64B00F87FC1 /* Hook.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Hook.sks; sourceTree = "<group>"; };
 		14B9914B2118E56100F87FC1 /* GameScene3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene3.swift; sourceTree = "<group>"; };
 		14B9914F2118E72A00F87FC1 /* GameScene3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene3.sks; sourceTree = "<group>"; };
 		14B991532118F3F400F87FC1 /* GameScene4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene4.swift; sourceTree = "<group>"; };
 		14B991552118F43400F87FC1 /* GameScene4.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene4.sks; sourceTree = "<group>"; };
 		14B991572118F60F00F87FC1 /* SeesawNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeesawNode.swift; sourceTree = "<group>"; };
+		14B99159211A3A7700F87FC1 /* GameScene5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene5.sks; sourceTree = "<group>"; };
+		14B9915B211A3CDB00F87FC1 /* GameScene5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene5.swift; sourceTree = "<group>"; };
+		14B9915D211A426B00F87FC1 /* PictureNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureNode.swift; sourceTree = "<group>"; };
+		14B99160211A43A100F87FC1 /* discolights-loop.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "discolights-loop.mov"; sourceTree = "<group>"; };
 		14C4642F21048D55009757CB /* CatNap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatNap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14C4643221048D55009757CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14C4643421048D55009757CB /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -66,11 +68,7 @@
 		14C4643F21048D55009757CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		14C4644221048D55009757CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		14C4644421048D55009757CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		14C4645521048E85009757CB /* lose.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lose.mp3; sourceTree = "<group>"; };
 		14C4645621048E85009757CB /* mrreow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mrreow.mp3; sourceTree = "<group>"; };
-		14C4645721048E85009757CB /* pop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pop.mp3; sourceTree = "<group>"; };
-		14C4645821048E86009757CB /* backgroundMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundMusic.mp3; sourceTree = "<group>"; };
-		14C4645921048E86009757CB /* win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = win.mp3; sourceTree = "<group>"; };
 		14C4646021049991009757CB /* Cat.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Cat.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,8 +99,18 @@
 				14B991412112560F00F87FC1 /* SpringNode.swift */,
 				14B991532118F3F400F87FC1 /* GameScene4.swift */,
 				14B991572118F60F00F87FC1 /* SeesawNode.swift */,
+				14B9915B211A3CDB00F87FC1 /* GameScene5.swift */,
+				14B9915D211A426B00F87FC1 /* PictureNode.swift */,
 			);
 			path = Code;
+			sourceTree = "<group>";
+		};
+		14B9915F211A436400F87FC1 /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				14B99160211A43A100F87FC1 /* discolights-loop.mov */,
+			);
+			path = Videos;
 			sourceTree = "<group>";
 		};
 		14C4642621048D54009757CB = {
@@ -124,6 +132,7 @@
 		14C4643121048D55009757CB /* CatNap */ = {
 			isa = PBXGroup;
 			children = (
+				14B9915F211A436400F87FC1 /* Videos */,
 				14B9912A2110ECC200F87FC1 /* Code */,
 				14C4645F21049968009757CB /* Scenes */,
 				14C4644A21048E50009757CB /* Sounds */,
@@ -140,11 +149,7 @@
 		14C4644A21048E50009757CB /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				14C4645821048E86009757CB /* backgroundMusic.mp3 */,
-				14C4645521048E85009757CB /* lose.mp3 */,
 				14C4645621048E85009757CB /* mrreow.mp3 */,
-				14C4645721048E85009757CB /* pop.mp3 */,
-				14C4645921048E86009757CB /* win.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -157,8 +162,8 @@
 				14C4643421048D55009757CB /* GameScene.sks */,
 				14B9913D21124D0C00F87FC1 /* GameScene2.sks */,
 				14B9914F2118E72A00F87FC1 /* GameScene3.sks */,
-				14B991472114F64B00F87FC1 /* Hook.sks */,
 				14B991552118F43400F87FC1 /* GameScene4.sks */,
+				14B99159211A3A7700F87FC1 /* GameScene5.sks */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -223,16 +228,13 @@
 			files = (
 				14C4643E21048D55009757CB /* Main.storyboard in Resources */,
 				14C4643521048D55009757CB /* GameScene.sks in Resources */,
-				14C4645D21048E86009757CB /* backgroundMusic.mp3 in Resources */,
-				14B991482114F64B00F87FC1 /* Hook.sks in Resources */,
+				14B9915A211A3A7700F87FC1 /* GameScene5.sks in Resources */,
 				14B991502118E72A00F87FC1 /* GameScene3.sks in Resources */,
+				14B99161211A43A100F87FC1 /* discolights-loop.mov in Resources */,
 				146D353B210E4F5800E4B220 /* CatCurl.sks in Resources */,
 				14C4644021048D55009757CB /* Assets.xcassets in Resources */,
 				14C4644321048D55009757CB /* LaunchScreen.storyboard in Resources */,
-				14C4645E21048E86009757CB /* win.mp3 in Resources */,
-				14C4645C21048E86009757CB /* pop.mp3 in Resources */,
 				14C4645B21048E86009757CB /* mrreow.mp3 in Resources */,
-				14C4645A21048E86009757CB /* lose.mp3 in Resources */,
 				14B991562118F43400F87FC1 /* GameScene4.sks in Resources */,
 				14C4646121049991009757CB /* Cat.sks in Resources */,
 				14B9913E21124D0C00F87FC1 /* GameScene2.sks in Resources */,
@@ -250,10 +252,12 @@
 				14B9912E2110EF8E00F87FC1 /* BedNode.swift in Sources */,
 				14B991302110F0A700F87FC1 /* CustomNode.swift in Sources */,
 				14B991542118F3F400F87FC1 /* GameScene4.swift in Sources */,
+				14B9915E211A426B00F87FC1 /* PictureNode.swift in Sources */,
 				14B9914021124DD100F87FC1 /* GameScene2.swift in Sources */,
 				14B9914C2118E56100F87FC1 /* GameScene3.swift in Sources */,
 				14B99136211109A700F87FC1 /* BlockNode.swift in Sources */,
 				14B991382111F48900F87FC1 /* MessageNode.swift in Sources */,
+				14B9915C211A3CDB00F87FC1 /* GameScene5.swift in Sources */,
 				14C4643B21048D55009757CB /* GameViewController.swift in Sources */,
 				14B991442112563C00F87FC1 /* BaseScene.swift in Sources */,
 				14B991322110F14600F87FC1 /* CatNode.swift in Sources */,

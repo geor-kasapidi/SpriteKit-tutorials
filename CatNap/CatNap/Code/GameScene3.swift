@@ -25,7 +25,7 @@ final class GameScene3: BaseScene {
     }
     
     override func restart() {
-        let scene = GameScene3(fileNamed: "GameScene3")
+        let scene = SKScene(fileNamed: "GameScene3")
         scene?.scaleMode = scaleMode
         view?.presentScene(scene)
     }

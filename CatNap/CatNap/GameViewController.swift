@@ -7,12 +7,12 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let scene = GameScene4(fileNamed: "GameScene4")!
-        scene.scaleMode = .aspectFill
+        let scene = SKScene(fileNamed: "GameScene5")
+        scene?.scaleMode = .aspectFill
         skView.presentScene(scene)
 
-        scene.isPaused = true
-        scene.isPaused = false
+        scene?.isPaused = true
+        scene?.isPaused = false
 
         skView.ignoresSiblingOrder = false
         skView.showsPhysics = true
