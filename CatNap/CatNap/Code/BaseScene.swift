@@ -95,5 +95,36 @@ class BaseScene: SKScene, SKPhysicsContactDelegate {
         currentMessageNode = msg
     }
     
+    final func showArrow(at point: CGPoint) {
+        let bezierPath = UIBezierPath()
+        bezierPath.move(to: CGPoint(x: -68.5, y: 1.5))
+        bezierPath.addLine(to: CGPoint(x: -24.5, y: -35.5))
+        bezierPath.addLine(to: CGPoint(x: -24.5, y: -13.5))
+        bezierPath.addLine(to: CGPoint(x: 63.5, y: -13.5))
+        bezierPath.addLine(to: CGPoint(x: 63.5, y: 1.5))
+        bezierPath.addLine(to: CGPoint(x: 63.5, y: 16.5))
+        bezierPath.addLine(to: CGPoint(x: -24.5, y: 16.5))
+        bezierPath.addLine(to: CGPoint(x: -24.5, y: 36.5))
+        bezierPath.addLine(to: CGPoint(x: -68.5, y: 1.5))
+        UIColor.green.setFill()
+        bezierPath.fill()
+        UIColor.black.setStroke()
+        bezierPath.lineWidth = 1
+        bezierPath.stroke()
+        
+        let node = SKShapeNode(path: bezierPath.cgPath)
+        node.glowWidth = 5
+        node.fillColor = SKColor.green
+        node.fillTexture = SKTexture(imageNamed: "wood_tinted")
+        node.alpha = 0.8
+        node.position = point
+        
+        addChild(node)
+        
+        let move = SKAction.moveBy(x: -40, y: 0, duration: 1)
+
+        node.run(SKAction.sequence([SKAction.repeat(SKAction.sequence([move, move.reversed()]), count: 3), SKAction.removeFromParent()]))
+    }
+    
     func restart() {}
 }

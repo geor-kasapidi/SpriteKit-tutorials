@@ -7,4 +7,14 @@ final class GameScene4: BaseScene {
         scene?.scaleMode = scaleMode
         view?.presentScene(scene)
     }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        
+        guard let point = touches.first?.location(in: self) else {
+            return
+        }
+        
+        showArrow(at: point)
+    }
 }
